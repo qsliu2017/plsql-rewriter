@@ -1,0 +1,22 @@
+#!/bin/bash
+
+cd $(dirname $0)/..
+
+function fail {
+    echo "ERROR: $1"
+    exit 1
+}
+
+java -version 2>&1 || fail "Java is required"
+
+alias antlr4="java -Xmx500M -cp ./g4/antlr-4.13.2-complete.jar org.antlr.v4.Tool"
+
+mkdir -p parser
+
+antlr4 \
+  -Dlanguage=Go \
+  -Xexact-output-dir \
+  -o parser \
+  g4/PlSqlLexer.g4 \
+  g4/PlSqlParser.g4 \
+  || fail "Failed to generate"

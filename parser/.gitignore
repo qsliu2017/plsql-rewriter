@@ -1,0 +1,6 @@
+*.interp
+*.tokens
+*.go
+
+!plsql_parser_base.go
+!plsql_lexer_base.go
